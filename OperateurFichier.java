@@ -24,20 +24,23 @@ public class OperateurFichier {
         Path resPath = Paths.get(filePath.toString().replace(".op", ".res"));
         try (BufferedReader reader = Files.newBufferedReader(filePath);
              BufferedWriter writer = Files.newBufferedWriter(resPath, StandardOpenOption.CREATE)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                try {
-                    writer.write(traiterLigne(line));
-                    writer.newLine();
-                } catch (FormatException e) {
-                    writer.write("ERROR");
-                    writer.newLine();
+                
+                reader.lines().forEach(line -> {
+                    try {
+                        writer.write(traiterLigne(line) + "\n");
+                    } catch (Exception e) {
+                        try {
+                            writer.write("ERROR\n");
+                        } catch (IOException ioException) {
+                            System.out.println("Erreur d'écriture dans le fichier: " + ioException.getMessage());
+                        }
+                    }
+                });
+
+            }   catch (IOException e) {
+                System.out.println("Erreur lors du traitement du fichier : " + filePath.getFileName());
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Erreur lors du traitement du fichier : " + filePath.getFileName());
-        }
-    }
 
     private static String traiterLigne(String line) throws FormatException {
         String[] parts = line.split(" ");
