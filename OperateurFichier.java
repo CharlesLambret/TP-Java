@@ -11,8 +11,7 @@ class FormatException extends Exception {
 public class OperateurFichier {
 
     public static void main(String[] args) {
-        String workingDir = args.length == 1 ? args[0] : System.getProperty("user.dir");
-        Path dirPath = Paths.get(workingDir);
+        Path dirPath = Paths.get(args.length == 1 ? args[0] : System.getProperty("user.dir"));
         try (Stream<Path> paths = Files.walk(dirPath)) {
             paths.filter(path -> path.toString().endsWith(".op"))
                  .forEach(OperateurFichier::traiterFichier);
