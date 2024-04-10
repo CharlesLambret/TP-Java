@@ -1,14 +1,18 @@
+import java.util.Map;
+import java.util.function.DoubleBinaryOperator;
+
 public class OperationFactory {
+    private static final Map<String, DoubleBinaryOperator> operations = Map.of(
+        "+", (a, b) -> a + b,
+        "-", (a, b) -> a - b,
+        "*", (a, b) -> a * b
+    );
+
     public static OperationStrategy getOperation(String op) throws OperationException {
-        switch (op) {
-            case "+":
-            return new Addition();
-            case "-":
-            return new Soustraction();
-            case "*":
-            return new Multiplication();
-            default:
-                throw new OperationException("Opérateur non supporté: " + op);
+        DoubleBinaryOperator operation = operations.get(op);
+        if (operation == null) {
+            throw new OperationException("Opérateur non supporté: " + op);
         }
+        return (num1, num2) -> operation.applyAsDouble(num1, num2);
     }
 }
