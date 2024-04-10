@@ -41,7 +41,7 @@ public class OperateurFichier {
     }
 
     private static String traiterLigne(String line) throws FormatException {
-        String[] parts = line.split(";");
+        String[] parts = line.split(" ");
         if (parts.length != 3) {
             throw new FormatException("Format invalide");
         }
