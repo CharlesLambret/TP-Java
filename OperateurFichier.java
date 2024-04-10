@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.*;
+import java.util.stream.Stream;
 
 class FormatException extends Exception {
     public FormatException(String message) {
@@ -10,15 +11,11 @@ class FormatException extends Exception {
 public class OperateurFichier {
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Utiliser le script: java OperateurFichier \"<chemin du dossier>\"");
-            return;
-        }
-        Path dirPath = Paths.get(args[0]);
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath, "*.op")) {
-            for (Path filePath : stream) {
-                traiterFichier(filePath);
-            }
+        String workingDir = args.length == 1 ? args[0] : System.getProperty("user.dir");
+        Path dirPath = Paths.get(workingDir);
+        try (Stream<Path> paths = Files.walk(dirPath)) {
+            paths.filter(path -> path.toString().endsWith(".op"))
+                 .forEach(OperateurFichier::traiterFichier);
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du dossier.");
         }
