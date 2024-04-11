@@ -6,15 +6,16 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 
 class ProcesseurFichiersTest {
 
     @Test
-    void processDirectory(@TempDir Path tempDir) throws IOException {
-        Path inputFile = tempDir.resolve("test.op");
-        Files.writeString(inputFile, "2 3 +\n");
+    void processOperations(@TempDir Path tempDir) throws IOException, OperationException {
+        List<OperationData> operations = new ArrayList<>();
+        operations.add(new OperationData("test.op", 2, 3, "+"));
 
-        ProcesseurFichiers.processDirectory(tempDir.toString());
+        ProcesseurFichiers.processOperations(operations, tempDir.toString());
 
         Path outputFile = tempDir.resolve("test.res");
         List<String> lines = Files.readAllLines(outputFile);
