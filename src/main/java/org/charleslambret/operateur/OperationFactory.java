@@ -2,6 +2,7 @@ package org.charleslambret.operateur;
 
 import java.util.Map;
 import java.util.function.DoubleBinaryOperator;
+import org.apache.commons.lang3.Validate;
 
 public class OperationFactory {
     private static final Map<String, DoubleBinaryOperator> operations = Map.of(
@@ -11,6 +12,7 @@ public class OperationFactory {
     );
 
     public static OperationStrategy getOperation(String op) throws OperationException {
+        Validate.notNull(op, "Le symbole de l'opération ne peut pas être null");
         DoubleBinaryOperator operation = operations.get(op);
         if (operation == null) {
             throw new OperationException("Opérateur non supporté: " + op);
