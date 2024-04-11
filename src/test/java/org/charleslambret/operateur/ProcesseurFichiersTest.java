@@ -11,7 +11,7 @@ import java.util.ArrayList;
 class ProcesseurFichiersTest {
 
     @Test
-    void processOperations(@TempDir Path tempDir) throws IOException, OperationException {
+    void processOperations(@TempDir Path tempDir) throws IOException {
         List<OperationData> operations = new ArrayList<>();
         operations.add(new OperationData("test.op", 2, 3, "+"));
 
@@ -19,6 +19,6 @@ class ProcesseurFichiersTest {
 
         Path outputFile = tempDir.resolve("test.res");
         List<String> lines = Files.readAllLines(outputFile);
-        assert lines.get(0).equals("5.0");
+        assert lines.get(0).equals("2.0 + 3.0 = 5.0");
     }
 }
