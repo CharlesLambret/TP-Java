@@ -20,7 +20,7 @@ public class OperationFactoryTest {
             Assertions.assertNotNull(multiplication);
             Assertions.assertEquals(200.0, multiplication.execute(10.0, 20.0), 0.001);
             
-            OperationFactory.getOperation("/"); // L'opérateur division n'est pas supporté
+            OperationFactory.getOperation("/"); 
             Assertions.fail("Devrait lancer une OperationException");
         } catch (OperationException e) {
             Assertions.assertEquals("Opérateur non supporté: /", e.getMessage());

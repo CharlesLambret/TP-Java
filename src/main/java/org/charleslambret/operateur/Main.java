@@ -8,7 +8,7 @@ public class Main {
         DatabaseManager dbManager = new DatabaseManager();
         try {
             List<OperationData> operations = dbManager.fetchOperationData();
-            String outputDirectory = System.getProperty("user.dir"); // Use current directory as output directory
+            String outputDirectory = System.getProperty("user.dir"); 
             ProcesseurFichiers.processOperations(operations, outputDirectory);
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des données : " + e.getMessage());

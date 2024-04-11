@@ -28,7 +28,7 @@ public class DatabaseManager {
                     rs.getDouble("param1"),
                     rs.getDouble("param2"),
                     rs.getString("operateur"),
-                    rs.getString("type") // Ajout du type
+                    rs.getString("type") 
                 ));
             }
         }
