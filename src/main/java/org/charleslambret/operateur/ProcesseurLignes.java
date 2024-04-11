@@ -21,11 +21,10 @@ public class ProcesseurLignes {
             String op = parts[2];
             OperationStrategy strategy = OperationFactory.getOperation(op);
             double result = strategy.execute(num1, num2);
-            writer.write(StringUtils.join(result, "\n"));
+            writer.write(StringUtils.join(String.valueOf(result), "\n"));
         } catch (Exception e) {
             try {
                 writer.write("ERROR\n");
-                System.err.println(ExceptionUtils.getStackTrace(e));
             } catch (IOException ioException) {
                 System.err.println("Erreur d'écriture dans le fichier: " + ExceptionUtils.getStackTrace(ioException));
             }
