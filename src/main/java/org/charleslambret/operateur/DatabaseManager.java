@@ -13,17 +13,26 @@ public class DatabaseManager {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public List<OperationData> fetchOperations() throws SQLException {
+    public List<OperationData> fetchOperationData() throws SQLException {
         List<OperationData> operations = new ArrayList<>();
-        String sql = "SELECT f.nom, l.param1, l.param2, l.operateur FROM fichier f JOIN ligne l ON f.id = l.fichier_id WHERE f.type = 'OP'";
-
+        String sql = "SELECT f.nom, l.param1, l.param2, l.operateur, f.type FROM FICHIER f " +
+                     "JOIN LIGNE l ON f.id = l.fichier_id " +
+                     "WHERE f.type = 'OP'";
+    
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                operations.add(new OperationData(rs.getString("nom"), rs.getDouble("param1"), rs.getDouble("param2"), rs.getString("operateur")));
+                operations.add(new OperationData(
+                    rs.getString("nom"),
+                    rs.getDouble("param1"),
+                    rs.getDouble("param2"),
+                    rs.getString("operateur"),
+                    rs.getString("type") // Ajout du type
+                ));
             }
         }
         return operations;
     }
+    
 }

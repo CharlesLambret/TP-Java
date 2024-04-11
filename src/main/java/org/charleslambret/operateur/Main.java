@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         DatabaseManager dbManager = new DatabaseManager();
         try {
-            List<OperationData> operations = dbManager.fetchOperations();
+            List<OperationData> operations = dbManager.fetchOperationData();
             String outputDirectory = System.getProperty("user.dir"); // Use current directory as output directory
             ProcesseurFichiers.processOperations(operations, outputDirectory);
         } catch (SQLException e) {
