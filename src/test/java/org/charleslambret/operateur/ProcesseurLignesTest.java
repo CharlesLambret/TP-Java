@@ -1,25 +1,33 @@
 package org.charleslambret.operateur;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-
-import static org.mockito.Mockito.*;
+import java.io.StringWriter;
 
 class ProcesseurLignesTest {
 
     @Test
     void processLineValidInput() throws IOException, OperationException {
-        BufferedWriter writer = mock(BufferedWriter.class);
+        StringWriter stringWriter = new StringWriter();
+        BufferedWriter writer = new BufferedWriter(stringWriter);
+
         ProcesseurLignes.processLine("2 3 +", writer);
-        verify(writer).write("5.0\n");
+        writer.flush(); 
+
+        assertEquals("5.0\n", stringWriter.toString());
     }
 
     @Test
     void processLineInvalidFormat() throws IOException {
-        BufferedWriter writer = mock(BufferedWriter.class);
+        StringWriter stringWriter = new StringWriter();
+        BufferedWriter writer = new BufferedWriter(stringWriter);
+
         ProcesseurLignes.processLine("invalid input", writer);
-        verify(writer).write("ERROR\n");
+        writer.flush();  
+
+        assertEquals("ERROR\n", stringWriter.toString());
     }
 }
