@@ -1,4 +1,5 @@
-package src.main.java;
+package org.charleslambret.operateur;
+
 import java.util.Map;
 import java.util.function.DoubleBinaryOperator;
 

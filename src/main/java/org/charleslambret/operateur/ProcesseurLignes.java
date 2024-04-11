@@ -1,4 +1,5 @@
-package src.main.java;
+package org.charleslambret.operateur;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 

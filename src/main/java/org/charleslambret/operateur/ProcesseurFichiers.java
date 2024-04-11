@@ -1,4 +1,4 @@
-package src.main.java;
+package org.charleslambret.operateur;
 import java.nio.file.*;
 import java.io.*;
 import java.util.stream.Stream;
