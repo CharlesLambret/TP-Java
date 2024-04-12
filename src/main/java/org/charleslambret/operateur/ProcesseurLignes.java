@@ -7,7 +7,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class ProcesseurLignes {
 
-    public static void processLine(String line, BufferedWriter writer) {
+    public void processLine(String line, BufferedWriter writer) {
         try {
             if (StringUtils.isBlank(line)) {
                 throw new OperationException("Format invalide");
@@ -19,7 +19,7 @@ public class ProcesseurLignes {
             double num1 = Double.parseDouble(parts[0]);
             double num2 = Double.parseDouble(parts[1]);
             String op = parts[2];
-            OperationStrategy strategy = OperationFactory.getOperation(op);
+            OperationStrategy strategy = new OperationFactory().getOperation(op);
             double result = strategy.execute(num1, num2);
             writer.write(StringUtils.join(String.valueOf(result), "\n"));
         } catch (Exception e) {

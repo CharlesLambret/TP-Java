@@ -9,4 +9,7 @@
     </bean>
     <bean id="processeurFichiers" class="org.charleslambret.operateur.ProcesseurFichiers">
     </bean>
+    
+    <bean id="operationFactory" class="org.charleslambret.operateur.OperationFactory"/>
+
 </beans>

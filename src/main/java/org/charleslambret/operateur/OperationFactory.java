@@ -5,13 +5,17 @@ import java.util.function.DoubleBinaryOperator;
 import org.apache.commons.lang3.Validate;
 
 public class OperationFactory {
-    private static final Map<String, DoubleBinaryOperator> operations = Map.of(
-        "+", (a, b) -> a + b,
-        "-", (a, b) -> a - b,
-        "*", (a, b) -> a * b
-    );
+    private Map<String, DoubleBinaryOperator> operations;
 
-    public static OperationStrategy getOperation(String op) throws OperationException {
+    public OperationFactory() {
+        operations = Map.of(
+            "+", (a, b) -> a + b,
+            "-", (a, b) -> a - b,
+            "*", (a, b) -> a * b
+        );
+    }
+
+    public OperationStrategy getOperation(String op) throws OperationException {
         Validate.notNull(op, "Le symbole de l'opération ne peut pas être null");
         DoubleBinaryOperator operation = operations.get(op);
         if (operation == null) {
