@@ -5,4 +5,8 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="reader" class="org.charleslambret.operateur.FileReader">
     </bean>
+    <bean id="databaseManager" class="org.charleslambret.operateur.DatabaseManager">
+    </bean>
+    <bean id="processeurFichiers" class="org.charleslambret.operateur.ProcesseurFichiers">
+    </bean>
 </beans>
