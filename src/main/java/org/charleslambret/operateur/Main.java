@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        String implementation = System.getProperty("reader.implementation", "FILE"); // Default to FILE
+        String implementation = System.getProperty("reader.implementation", "FILE");
         try {
             if (implementation.equals("JDBC")) {
                 DatabaseManager dbManager = new DatabaseManager();
