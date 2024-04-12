@@ -1,4 +1,4 @@
-package org.charleslambret.operateur.ProcessFichiers;
+package org.charleslambret.operateur.processfichier;
 
 import java.nio.file.*;
 import java.io.*;

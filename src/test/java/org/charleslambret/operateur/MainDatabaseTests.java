@@ -1,8 +1,14 @@
 
 package org.charleslambret.operateur;
 
+import org.charleslambret.operateur.processfichier.FileReader;
+import org.charleslambret.operateur.processfichier.FileWriter;
+import org.charleslambret.operateur.processfichier.ImplementationFileReader;
+import org.charleslambret.operateur.processfichier.ImplementationFileWriter;
+
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,7 +35,7 @@ public class MainDatabaseTests {
         try {
             List<OperationData> operations = dbManager.fetchOperationData();
             assertNotNull(operations);
-            assertFalse(operations.isEmpty()); // Ensure data is fetched
+            assertFalse(operations.isEmpty()); 
         } catch (SQLException e) {
             fail("Failed to fetch data from the database");
         }
@@ -43,8 +49,13 @@ public class MainDatabaseTests {
             assertNotNull(operations);
             String directory = System.getProperty("user.dir");
 
-            ProcesseurFichiers.processOperations(operations, directory);
+            FileReader fileReader = new ImplementationFileReader(); 
+            FileWriter fileWriter = new ImplementationFileWriter(); 
+            ProcesseurFichiers processor = new ProcesseurFichiers(fileReader, fileWriter);
 
+            for (OperationData operation : operations) {
+                processor.processFile(Paths.get(directory, operation.getFileName() + ".op"));
+            }
 
         } catch (SQLException | IOException e) {
             fail("Processing operations failed due to " + e.getMessage());
