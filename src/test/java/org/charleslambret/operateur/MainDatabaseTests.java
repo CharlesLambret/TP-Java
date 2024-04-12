@@ -1,4 +1,3 @@
-
 package org.charleslambret.operateur;
 
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ public class MainDatabaseTests {
         try {
             List<OperationData> operations = dbManager.fetchOperationData();
             assertNotNull(operations);
-            assertFalse(operations.isEmpty()); // Ensure data is fetched
+            assertFalse(operations.isEmpty()); 
         } catch (SQLException e) {
             fail("Failed to fetch data from the database");
         }
@@ -42,9 +41,9 @@ public class MainDatabaseTests {
             List<OperationData> operations = dbManager.fetchOperationData();
             assertNotNull(operations);
             String directory = System.getProperty("user.dir");
-
-            ProcesseurFichiers.processOperations(operations, directory);
-
+            
+            ProcesseurFichiers processeur = new ProcesseurFichiers();
+            processeur.processOperations(operations, directory);
 
         } catch (SQLException | IOException e) {
             fail("Processing operations failed due to " + e.getMessage());
